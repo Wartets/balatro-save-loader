@@ -4,19 +4,35 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover'>
     <title>Balatro Save Editor</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name='description' content='Edit Balatro save files easily'>
+    <meta name='theme-color' content='#ffffff' media='(prefers-color-scheme: light)'>
+    <meta name='theme-color' content='#000000' media='(prefers-color-scheme: dark)'>
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'>
+    <meta name='apple-mobile-web-app-title' content='Balatro Save Editor'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
     <script src='js/main.js' type="module"></script>
 </head>
 
 <body>
-    <h1>Balatro Save Editor</h1>
-    <input type="file" id="file" name="file" />
-    <br>
-    <button id="download" disabled>Download</button>
-    <div id="buttons"></div>
-    <div id="data"></div>
+    <main class="app">
+        <header class="app-header">
+            <h1>Balatro Save Editor</h1>
+        </header>
+        <section class="panel">
+            <label class="file-label" for="file">
+                <span>Choose save file</span>
+                <input type="file" id="file" name="file" />
+            </label>
+            <div class="actions">
+                <button id="download" disabled>Download</button>
+            </div>
+        </section>
+        <section id="buttons" class="tab-buttons"></section>
+        <section id="data" class="data-panel"></section>
+    </main>
 </body>
 
 </html>

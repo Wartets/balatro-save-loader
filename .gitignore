@@ -3,3 +3,5 @@ build
 node_modules
 dist
 bundle.js
+/.vscode
+example.json

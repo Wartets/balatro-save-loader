@@ -2,15 +2,19 @@ import { makeValuesTab, rawTab } from "./sharedTabs.js";
 
 const values = [
     {
-        name: 'All Jokers Unlocked (Disables Achievements)',
-        path: 'all_unlocked',
-        type: 'checkbox',
-        default: false,
+        name: 'Profile Settings',
+        type: 'label',
     },
     {
         name: 'Profile Name',
         path: 'name',
         type: 'text',
+    },
+    {
+        name: 'All Jokers Unlocked',
+        path: 'all_unlocked',
+        type: 'checkbox',
+        default: false,
     },
 
     {
@@ -38,7 +42,7 @@ const values = [
         type: 'number'
     },
     {
-        name: 'Collection',
+        name: 'Collection Size',
         path: 'high_scores.collection.amt',
         type: 'number'
     },
@@ -52,74 +56,54 @@ const values = [
         path: 'high_scores.most_money.amt',
         type: 'number'
     },
-    // {
-    //     name: 'Most Played Hand',
-    //     path: 'high_scores.poker_hand.amt',
-    //     type: 'number'
-    // }, // IDK how this is validated rn
     {
         name: 'Most Bosses in a Row',
         path: 'high_scores.boss_streak.amt',
         type: 'number'
     },
+    {
+        name: 'Best Flush Hand',
+        path: 'high_scores.flush_hand.amt',
+        type: 'number'
+    },
+    {
+        name: 'Best Poker Hand Played',
+        path: 'high_scores.poker_hands.amt',
+        type: 'number'
+    },
 
     {
-        name: 'Stats',
+        name: 'Base Statistics',
         type: 'label',
     },
     {
-        name: 'Cards Discarded',
-        path: 'career_stats.c_cards_discarded',
-        type: 'number'
-    },
-    {
-        name: 'Round Interest Cap Streak',
-        path: 'career_stats.c_round_interest_cap_streak',
-        type: 'number'
-    },
-    {
-        name: 'Dollars Earned',
-        path: 'career_stats.c_dollars_earned',
-        type: 'number'
-    },
-    {
-        name: 'Vouchers Bought',
-        path: 'career_stats.c_vouchers_bought',
-        type: 'number'
-    },
-    {
-        name: 'Planetarium Used',
-        path: 'career_stats.c_planetarium_used',
-        type: 'number'
-    },
-    {
-        name: 'Wins',
+        name: 'Total Wins',
         path: 'career_stats.c_wins',
         type: 'number'
     },
     {
-        name: 'Shop Rerolls',
-        path: 'career_stats.c_shop_rerolls',
-        type: 'number'
-    },
-    {
-        name: 'Cards Played',
-        path: 'career_stats.c_cards_played',
-        type: 'number'
-    },
-    {
-        name: 'Tarots Bought',
-        path: 'career_stats.c_tarots_bought',
-        type: 'number'
-    },
-    {
-        name: 'Losses',
+        name: 'Total Losses',
         path: 'career_stats.c_losses',
         type: 'number'
     },
     {
-        name: 'Shop Dollars Spent',
-        path: 'career_stats.c_shop_dollars_spent',
+        name: 'Total Rounds Played',
+        path: 'career_stats.c_rounds',
+        type: 'number'
+    },
+    {
+        name: 'Hands Played',
+        path: 'career_stats.c_hands_played',
+        type: 'number'
+    },
+
+    {
+        name: 'Card Play Statistics',
+        type: 'label',
+    },
+    {
+        name: 'Cards Played',
+        path: 'career_stats.c_cards_played',
         type: 'number'
     },
     {
@@ -128,33 +112,13 @@ const values = [
         type: 'number'
     },
     {
-        name: 'Planets Bought',
-        path: 'career_stats.c_planets_bought',
+        name: 'Cards Sold',
+        path: 'career_stats.c_cards_sold',
         type: 'number'
     },
     {
-        name: 'Hands Played',
-        path: 'career_stats.c_hands_played',
-        type: 'number'
-    },
-    {
-        name: 'Tarot Reading Used',
-        path: 'career_stats.c_tarot_reading_used',
-        type: 'number'
-    },
-    {
-        name: 'Rounds',
-        path: 'career_stats.c_rounds',
-        type: 'number'
-    },
-    {
-        name: 'Jokers Sold',
-        path: 'career_stats.c_jokers_sold',
-        type: 'number'
-    },
-    {
-        name: 'Single Hand Round Streak',
-        path: 'career_stats.c_single_hand_round_streak',
+        name: 'Cards Discarded',
+        path: 'career_stats.c_cards_discarded',
         type: 'number'
     },
     {
@@ -162,11 +126,106 @@ const values = [
         path: 'career_stats.c_playing_cards_bought',
         type: 'number'
     },
+
     {
-        name: 'Cards Sold',
-        path: 'career_stats.c_cards_sold',
+        name: 'Shop Transactions',
+        type: 'label',
+    },
+    {
+        name: 'Shop Dollars Spent',
+        path: 'career_stats.c_shop_dollars_spent',
         type: 'number'
-    }
+    },
+    {
+        name: 'Shop Rerolls',
+        path: 'career_stats.c_shop_rerolls',
+        type: 'number'
+    },
+    {
+        name: 'Jokers Bought',
+        path: 'career_stats.c_jokers_bought',
+        type: 'number'
+    },
+    {
+        name: 'Jokers Sold',
+        path: 'career_stats.c_jokers_sold',
+        type: 'number'
+    },
+
+    {
+        name: 'Consumable Purchases',
+        type: 'label',
+    },
+    {
+        name: 'Tarots Bought',
+        path: 'career_stats.c_tarots_bought',
+        type: 'number'
+    },
+    {
+        name: 'Planets Bought',
+        path: 'career_stats.c_planets_bought',
+        type: 'number'
+    },
+    {
+        name: 'Vouchers Bought',
+        path: 'career_stats.c_vouchers_bought',
+        type: 'number'
+    },
+
+    {
+        name: 'Consumable Usage',
+        type: 'label',
+    },
+    {
+        name: 'Tarot Reading Used',
+        path: 'career_stats.c_tarot_reading_used',
+        type: 'number'
+    },
+    {
+        name: 'Planetarium Used',
+        path: 'career_stats.c_planetarium_used',
+        type: 'number'
+    },
+
+    {
+        name: 'Interest & Earning',
+        type: 'label',
+    },
+    {
+        name: 'Dollars Earned',
+        path: 'career_stats.c_dollars_earned',
+        type: 'number'
+    },
+    {
+        name: 'Round Interest Cap Streak',
+        path: 'career_stats.c_round_interest_cap_streak',
+        type: 'number'
+    },
+
+    {
+        name: 'Streak Statistics',
+        type: 'label',
+    },
+    {
+        name: 'Single Hand Round Streak',
+        path: 'career_stats.c_single_hand_round_streak',
+        type: 'number'
+    },
+
+    {
+        name: 'Advanced Metrics',
+        type: 'label',
+    },
+    {
+        name: 'Money Earned From Selling',
+        path: 'career_stats.c_money_from_selling',
+        type: 'number'
+    },
+    {
+        name: 'Efficiency',
+        path: 'career_stats.c_efficiency',
+        type: 'number'
+    },
 ];
 
 const profileTabs = [

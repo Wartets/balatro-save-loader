@@ -1,25 +1,16 @@
-function handleTabClose({ tab, dataDiv, ctx }) {
-    if (tab) {
-        tab.save?.({
-            dataDiv,
-            ...ctx,
-        });
-    }
-    dataDiv.innerHTML = '';
-}
-
 function renderTabs(tabData, ctx, buttonDiv, dataDiv) {
     const loaded = {
         tab: null,
         canClose: true,
     };
-    let buttons;
-    let returnData = {
+    const tabElements = {};
+    let buttons = [];
+
+    const returnData = {
         saveCurrent: () => {
-            loaded.tab.save?.({
-                dataDiv,
-                ...ctx,
-            });
+            if (loaded.tab?.save) {
+                loaded.tab.save({ dataDiv, ...ctx });
+            }
         }
     };
 
@@ -31,6 +22,21 @@ function renderTabs(tabData, ctx, buttonDiv, dataDiv) {
         returnData?.setCanClose?.(canClose);
     };
 
+    const displayTab = (tab, button) => {
+        if (loaded.tab && loaded.tab !== tab) {
+            loaded.tab.save?.({ dataDiv, ...ctx });
+        }
+        dataDiv.innerHTML = '';
+        Object.values(tabElements).forEach((btn) => {
+            btn.style.borderBottomColor = 'transparent';
+            btn.style.color = 'color-mix(in srgb, canvastext 60%, transparent)';
+        });
+        button.style.borderBottomColor = 'canvastext';
+        button.style.color = 'canvastext';
+        tab.render?.({ ...ctx, dataDiv, setCanClose });
+        loaded.tab = tab;
+    };
+
     buttons = tabData.map((tab) => {
         if (!(tab.shouldShow?.(ctx) ?? true)) {
             return null;
@@ -38,25 +44,23 @@ function renderTabs(tabData, ctx, buttonDiv, dataDiv) {
         const button = document.createElement('button');
         button.textContent = tab.name;
         button.addEventListener('click', () => {
-            if (loaded.tab && !loaded.canClose && !tab.canClose(ctx)) {
-                return;
-            }
-            handleTabClose({ tab: loaded.tab, dataDiv, ctx });
-            tab.render?.({ ...ctx, dataDiv, setCanClose });
-            loaded.tab = tab;
+            displayTab(tab, button);
         });
+        tabElements[tab.name] = button;
         return button;
     }).filter((button) => button !== null);
+
     buttonDiv.innerHTML = '';
     buttons.forEach((button) => buttonDiv.appendChild(button));
+
     if (buttons.length > 0) {
-        buttons[0].click();
+        displayTab(tabData.find(t => (t.shouldShow?.(ctx) ?? true)), buttons[0]);
     }
 
     return returnData;
 }
 
+
 export {
     renderTabs,
-    handleTabClose,
 }

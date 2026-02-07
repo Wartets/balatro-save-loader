@@ -3,6 +3,7 @@ import { profileTabs } from './profileUI.js';
 import { guessFileType, handleKnownArrays } from './saveLogic.js';
 import { saveTabs } from './saveUI.js';
 import { settingsTabs } from './settingsUI.js';
+import { cardsTabs } from './cardsUI.js';
 import { renderTabs } from './tabs.js';
 import { unknownTabs } from './unknownUI.js';
 
@@ -55,7 +56,7 @@ function readFile() {
                 let tabs = unknownTabs;
                 switch (type) {
                     case 'save':
-                        tabs = saveTabs;
+                        tabs = [...saveTabs, ...cardsTabs];
                         break;
                     case 'profile':
                         tabs = profileTabs;

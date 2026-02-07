@@ -35,9 +35,14 @@ function get(obj, path) {
 function set(obj, path, value) {
     const keys = path.split('.');
     const lastKey = keys.pop();
-    const parent = keys.reduce((acc, key) => acc?.[key], obj);
-    if (parent)
-        parent[lastKey] = value;
+    let parent = obj;
+    for (const key of keys) {
+        if (!parent[key] || typeof parent[key] !== 'object') {
+            parent[key] = {};
+        }
+        parent = parent[key];
+    }
+    parent[lastKey] = value;
 }
 
 function guessFileType(data, filename) {
