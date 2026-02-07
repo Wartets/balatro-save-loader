@@ -13,6 +13,8 @@
     <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'>
     <meta name='apple-mobile-web-app-title' content='Balatro Save Editor'>
     <link rel='stylesheet' type='text/css' media='screen' href='css/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/codemirror.css'>
+    <script src='js/editor.js' type="module"></script>
     <script src='js/main.js' type="module"></script>
 </head>
 
@@ -28,6 +30,19 @@
             </label>
             <div class="actions">
                 <button id="download" disabled>Download</button>
+            </div>
+        </section>
+        <section class="info-panel" id="info">
+            <div class="info-grid">
+                <div class="info-item"><span class="info-label">File</span><span id="info-name">-</span></div>
+                <div class="info-item"><span class="info-label">Type</span><span id="info-type">-</span></div>
+                <div class="info-item"><span class="info-label">Size</span><span id="info-size">-</span></div>
+                <div class="info-item"><span class="info-label">Jokers</span><span id="info-jokers">-</span></div>
+                <div class="info-item"><span class="info-label">Consumables</span><span id="info-consumables">-</span></div>
+                <div class="info-item"><span class="info-label">Hand</span><span id="info-hand">-</span></div>
+                <div class="info-item"><span class="info-label">Deck</span><span id="info-deck">-</span></div>
+                <div class="info-item"><span class="info-label">Discard</span><span id="info-discard">-</span></div>
+                <div class="info-item"><span class="info-label">Total Cards</span><span id="info-total">-</span></div>
             </div>
         </section>
         <section id="buttons" class="tab-buttons"></section>

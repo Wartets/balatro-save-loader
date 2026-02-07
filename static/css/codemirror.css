@@ -1,0 +1,172 @@
+:root {
+    --cm-bg: color-mix(in srgb, canvas 96%, canvastext 4%);
+    --cm-border: color-mix(in srgb, canvastext 20%, transparent);
+    --cm-dark-bg: #1e1e1e;
+    --cm-dark-text: #d4d4d4;
+    --cm-light-bg: #f5f5f5;
+    --cm-light-text: #333333;
+}
+
+@media (prefers-color-scheme: dark) {
+    .code-editor .cm-editor {
+        background: var(--cm-dark-bg) !important;
+        color: var(--cm-dark-text) !important;
+    }
+    
+    .code-editor .cm-gutters {
+        background: var(--cm-dark-bg) !important;
+        color: #858585 !important;
+    }
+    
+    .code-editor .cm-propertyName {
+        color: #4f8cff !important;
+    }
+    
+    .code-editor .cm-string {
+        color: #2aa876 !important;
+    }
+    
+    .code-editor .cm-number {
+        color: #f08c3b !important;
+    }
+    
+    .code-editor .cm-atom,
+    .code-editor .cm-boolean,
+    .code-editor .cm-null {
+        color: #a26bff !important;
+    }
+    
+    .code-editor .cm-keyword {
+        color: #ff6b6b !important;
+    }
+    
+    .code-editor .cm-punctuation {
+        color: #d4d4d4 !important;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .code-editor .cm-editor {
+        background: var(--cm-light-bg) !important;
+        color: var(--cm-light-text) !important;
+    }
+    
+    .code-editor .cm-gutters {
+        background: #ececec !important;
+        color: #757575 !important;
+    }
+    
+    .code-editor .cm-propertyName {
+        color: #0066cc !important;
+    }
+    
+    .code-editor .cm-string {
+        color: #00a651 !important;
+    }
+    
+    .code-editor .cm-number {
+        color: #e89820 !important;
+    }
+    
+    .code-editor .cm-atom,
+    .code-editor .cm-boolean,
+    .code-editor .cm-null {
+        color: #7b3ff2 !important;
+    }
+    
+    .code-editor .cm-keyword {
+        color: #d93535 !important;
+    }
+    
+    .code-editor .cm-punctuation {
+        color: #333333 !important;
+    }
+}
+
+.code-editor .cm-editor {
+    background: var(--cm-bg);
+    color: canvastext;
+}
+
+.code-editor .cm-content {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.9rem;
+}
+
+.code-editor .cm-gutters {
+    background: var(--cm-bg);
+    color: color-mix(in srgb, canvastext 60%, transparent);
+    border-right: 1px solid var(--cm-border);
+}
+
+.code-editor .cm-lineNumbers .cm-gutterElement {
+    padding: 0 0.6rem;
+}
+
+.code-editor .cm-activeLine {
+    background: color-mix(in srgb, canvastext 6%, transparent);
+}
+
+.code-editor .cm-selectionBackground,
+.code-editor .cm-content ::selection {
+    background: color-mix(in srgb, canvastext 18%, transparent);
+}
+
+.code-editor .cm-propertyName {
+    color: #4f8cff;
+}
+
+.code-editor .cm-string {
+    color: #2aa876;
+}
+
+.code-editor .cm-number {
+    color: #f08c3b;
+}
+
+.code-editor .cm-atom,
+.code-editor .cm-boolean,
+.code-editor .cm-null {
+    color: #a26bff;
+}
+
+.code-editor .cm-keyword {
+    color: #ff6b6b;
+}
+
+.code-editor .cm-comment {
+    color: color-mix(in srgb, canvastext 55%, transparent);
+}
+
+textarea {
+    background: linear-gradient(to right, 
+        #1a1a1a 2rem,
+        #252525 2rem,
+        #252525 calc(100% - 1px)
+    );
+    color: #d4d4d4;
+    caret-color: #d4d4d4;
+    white-space: pre;
+}
+
+@media (prefers-color-scheme: light) {
+    textarea {
+        background: #f5f5f5;
+        color: #333333;
+        caret-color: #333333;
+    }
+}
+
+.code-editor .cm-matchingBracket {
+    background-color: color-mix(in srgb, canvastext 15%, transparent);
+    outline: 1px solid color-mix(in srgb, canvastext 30%, transparent);
+}
+
+.code-editor .cm-line {
+    padding: 0;
+}
+
+textarea {
+    font-feature-settings: "liga" 0;
+    -moz-font-feature-settings: "liga" 0;
+}

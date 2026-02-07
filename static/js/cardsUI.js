@@ -1,4 +1,5 @@
 import { get, set } from "./saveLogic.js";
+import { createJsonEditor } from "./sharedTabs.js";
 
 function makeCardsTab() {
     return {
@@ -113,13 +114,10 @@ function makeCardsTab() {
                         header.appendChild(headerBtns);
                         modal.appendChild(header);
 
-                        const textarea = document.createElement('textarea');
-                        textarea.value = json;
-                        textarea.style.flex = '1';
-                        textarea.style.overflow = 'auto';
-                        textarea.style.fontFamily = 'ui-monospace, monospace';
-                        textarea.style.fontSize = '0.85rem';
-                        modal.appendChild(textarea);
+                        const editorHost = document.createElement('div');
+                        const editor = createJsonEditor(editorHost, json, () => {});
+                        editorHost.style.flex = '1';
+                        modal.appendChild(editorHost);
 
                         const footer = document.createElement('div');
                         footer.style.display = 'flex';
@@ -130,7 +128,7 @@ function makeCardsTab() {
                         saveBtn.textContent = 'Save';
                         saveBtn.addEventListener('click', () => {
                             try {
-                                const updated = JSON.parse(textarea.value);
+                                const updated = JSON.parse(editor.getValue());
                                 if (Array.isArray(updated)) {
                                     set(data, area.path, updated);
                                     countBadge.textContent = updated.length;
@@ -219,10 +217,9 @@ function makeCardEditorTab() {
                 hint.textContent = 'Paste one or more card objects as JSON. Example: [{"suit":"H","value":"A"},{"suit":"D","value":"K"}]';
                 section.appendChild(hint);
 
-                const textarea = document.createElement('textarea');
-                textarea.placeholder = 'Paste JSON card array here...';
-                textarea.style.minHeight = '150px';
-                section.appendChild(textarea);
+                        const editorHost = document.createElement('div');
+                        const editor = createJsonEditor(editorHost, '', () => {});
+                        section.appendChild(editorHost);
 
                 const areaSelect = document.createElement('div');
                 areaSelect.className = 'form-row';
@@ -269,11 +266,11 @@ function makeCardEditorTab() {
                 replaceBtn.textContent = 'Replace All';
                 replaceBtn.addEventListener('click', () => {
                     try {
-                        const json = JSON.parse(textarea.value);
+                        const json = JSON.parse(editor.getValue());
                         if (Array.isArray(json)) {
                             set(data, select.value, json);
                             setCanClose(true);
-                            textarea.value = '';
+                            editor.setValue('');
                             alert('Replaced ' + json.length + ' cards');
                         } else {
                             alert('Must be an array of card objects');
@@ -288,13 +285,13 @@ function makeCardEditorTab() {
                 appendBtn.textContent = 'Append';
                 appendBtn.addEventListener('click', () => {
                     try {
-                        const json = JSON.parse(textarea.value);
+                        const json = JSON.parse(editor.getValue());
                         const cards = Array.isArray(json) ? json : [json];
                         const existing = get(data, select.value) || [];
                         const updated = [...existing, ...cards];
                         set(data, select.value, updated);
                         setCanClose(true);
-                        textarea.value = '';
+                        editor.setValue('');
                         alert('Added ' + cards.length + ' cards');
                     } catch (e) {
                         alert('Invalid JSON: ' + e.message);
@@ -305,9 +302,9 @@ function makeCardEditorTab() {
                 const clearBtn = document.createElement('button');
                 clearBtn.textContent = 'Clear';
                 clearBtn.style.backgroundColor = 'color-mix(in srgb, #e5484d 20%, canvas)';
-                clearBtn.addEventListener('click', () => {
-                    textarea.value = '';
-                });
+                    clearBtn.addEventListener('click', () => {
+                        editor.setValue('');
+                    });
                 actionBtns.appendChild(clearBtn);
 
                 section.appendChild(actionBtns);
